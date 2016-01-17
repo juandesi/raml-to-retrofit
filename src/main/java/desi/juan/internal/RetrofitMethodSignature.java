@@ -8,12 +8,12 @@ package desi.juan.internal;
 
 import static desi.juan.internal.util.MethodGeneratorUtils.buildMethodName;
 import static desi.juan.internal.util.MethodGeneratorUtils.buildParamName;
+import static desi.juan.internal.util.MethodGeneratorUtils.toStringValue;
 
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
-import com.squareup.javapoet.TypeName;
 
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -24,7 +24,6 @@ import javax.lang.model.element.Modifier;
 import desi.juan.internal.action.ActionRegisterProvider;
 import org.raml.model.Action;
 import org.raml.model.parameter.Header;
-import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -46,7 +45,7 @@ class RetrofitMethodSignature implements RetrofitCodeGenerable<MethodSpec>
         action.getResource().getResolvedUriParameters().keySet()
                 .forEach(uriParam -> parameters.add(buildPathParam(uriParam)));
         action.getQueryParameters().keySet()
-                .forEach(queryParam -> parameters.add(buildQueryParam(ParameterizedTypeName.get(String.class), queryParam)));
+                .forEach(queryParam -> parameters.add(buildQueryParam(String.class, queryParam)));
 
         if (action.hasBody())
         {
@@ -57,23 +56,23 @@ class RetrofitMethodSignature implements RetrofitCodeGenerable<MethodSpec>
                 .addParameters(parameters)
                 .addAnnotation(buildBaseMethodAnnotation(action))
                 .addModifiers(Modifier.ABSTRACT, Modifier.PUBLIC)
-                .returns(ParameterizedTypeName.get(Call.class, String.class));
+                .returns(String.class);
 
         return method.build();
     }
 
-    private ParameterSpec buildQueryParam(TypeName type, String name)
+    private ParameterSpec buildQueryParam(Class type, String name)
     {
         name = name.replace(":", "");
         return ParameterSpec.builder(type, buildParamName(name))
-                .addAnnotation(AnnotationSpec.builder(Query.class).addMember(VALUE, name).build())
+                .addAnnotation(AnnotationSpec.builder(Query.class).addMember(VALUE, toStringValue(name)).build())
                 .build();
     }
 
     private ParameterSpec buildPathParam(String name)
     {
         return ParameterSpec.builder(ParameterizedTypeName.get(String.class), buildParamName(name))
-                .addAnnotation(AnnotationSpec.builder(Path.class).addMember(VALUE, name).build())
+                .addAnnotation(AnnotationSpec.builder(Path.class).addMember(VALUE, toStringValue(name)).build())
                 .build();
     }
 
@@ -87,13 +86,11 @@ class RetrofitMethodSignature implements RetrofitCodeGenerable<MethodSpec>
     private String buildHeadersArray(Map<String, Header> headers)
     {
         return "";
-        //headers.keySet()
-        //        .forEach(header -> header);
     }
 
     private AnnotationSpec buildBaseMethodAnnotation(Action action)
     {
-        return AnnotationSpec.builder(ActionRegisterProvider.get(action)).addMember(VALUE, action.getResource().getUri()).build();
+        return AnnotationSpec.builder(ActionRegisterProvider.get(action)).addMember(VALUE, toStringValue(action.getResource().getUri())).build();
     }
 
 

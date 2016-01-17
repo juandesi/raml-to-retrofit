@@ -14,13 +14,13 @@ import java.nio.file.Path;
 
 import desi.juan.internal.RetrofitInterface;
 
-public class RamlConverter
+public class Scaffolder
 {
 
     private final RetrofitInterface retrofitInterface;
     private final String filePackage;
 
-    public RamlConverter(String name, String filePackage, String ramlLocation)
+    public Scaffolder(String name, String filePackage, String ramlLocation)
     {
         this.filePackage = filePackage;
         this.retrofitInterface = new RetrofitInterface(name, ramlLocation);

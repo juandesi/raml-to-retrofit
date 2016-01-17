@@ -8,7 +8,7 @@ from a RAML file.
 ----
 public void doGenerate() {
 	final String directory = "/Users/juandesi/projectX";
-	RamlConverter converter = new RamlConverter("InterfaceName", "org.desi.juan", "/resource/location");
+	Scaffolder converter = new Scaffolder("InterfaceName", "org.desi.juan", "/resource/location");
 	converter.write(Paths.get(directory));
 }
 ----

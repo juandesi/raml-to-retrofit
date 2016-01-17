@@ -51,4 +51,9 @@ public class MethodGeneratorUtils
         return name;
     }
 
+    public static String toStringValue(String value)
+    {
+        return "\"" + value + "\"";
+    }
+
 }
