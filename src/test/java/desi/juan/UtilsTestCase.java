@@ -6,7 +6,7 @@
  */
 package desi.juan;
 
-import static desi.juan.util.MethodGeneratorUtils.uriToCammelCase;
+import static desi.juan.internal.util.MethodGeneratorUtils.uriToCammelCase;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

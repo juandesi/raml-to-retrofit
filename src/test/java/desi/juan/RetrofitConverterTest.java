@@ -11,22 +11,32 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
 
+import desi.juan.internal.RetrofitInterface;
 import org.junit.Test;
 
 public class RetrofitConverterTest
 {
-
     @Test
     public void testTwitterInterfaceGeneration() throws IOException
     {
         RetrofitInterface testInterface = new RetrofitInterface("TwitterServiceInterface", "twitter/api.raml");
-        JavaFile resultInterface = testInterface.generate();
+        TypeSpec resultInterface = testInterface.generate();
         assertThat(resultInterface, is(not(nullValue())));
-        resultInterface.writeTo(System.out);
     }
+
+    @Test
+    public void testTwitterInterfaceGeneration2() throws IOException
+    {
+        RetrofitInterface testInterface =
+                new RetrofitInterface("TwitterServiceInterface",
+                                        "/Users/juandesi/Workspace/raml-to-retrofit/src/test/resources/twitter/api.raml");
+        TypeSpec resultInterface = testInterface.generate();
+        assertThat(resultInterface, is(not(nullValue())));
+    }
+
 
 }

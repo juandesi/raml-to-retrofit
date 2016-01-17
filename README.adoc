@@ -1,0 +1,32 @@
+= RAML to Retrofit
+
+This library allows you to generate a consumable Java interface based on http://square.github.io/retrofit/[Retrofit] annotations
+from a RAML file.
+
+== Example
+[source, java]
+----
+public void doGenerate() {
+	final String directory = "/Users/juandesi/projectX";
+	RamlConverter converter = new RamlConverter("InterfaceName", "org.desi.juan", "/resource/location");
+	converter.write(Paths.get(directory));
+}
+----
+
+Your java file should be located in the specified directory.
+
+== Building Locally
+
+=== Prerequisites
+
+* Maven installation
+* JDK 8
+
+=== Build
+
+Just run a `mvn clean install -DskipTests` command and maven will install the lib in your local repository and also the jar file will be generated under the __/target__ folder.
+
+
+
+
+

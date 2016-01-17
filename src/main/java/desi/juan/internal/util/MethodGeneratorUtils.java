@@ -4,13 +4,13 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package desi.juan.util;
+package desi.juan.internal.util;
 
 import com.google.common.base.CaseFormat;
 
 import javax.lang.model.SourceVersion;
 
-import desi.juan.exception.IllegalNameException;
+import desi.juan.internal.exception.IllegalNameException;
 import org.apache.commons.lang.StringUtils;
 import org.raml.model.Action;
 

@@ -4,9 +4,8 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package desi.juan;
+package desi.juan.internal;
 
-import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 
@@ -18,7 +17,7 @@ import org.raml.model.Raml;
 import org.raml.model.Resource;
 import org.raml.parser.visitor.RamlDocumentBuilder;
 
-public class RetrofitInterface implements RetrofitCodeGenerable<JavaFile>
+public final class RetrofitInterface implements RetrofitCodeGenerable<TypeSpec>
 {
 
     private final TypeSpec.Builder interfaceBuilder;
@@ -29,11 +28,11 @@ public class RetrofitInterface implements RetrofitCodeGenerable<JavaFile>
         interfaceBuilder = TypeSpec.interfaceBuilder(interfaceName);
     }
 
-    public JavaFile generate()
+    public TypeSpec generate()
     {
         Raml raml = new RamlDocumentBuilder().build(ramlResource);
         registerResources(raml.getResources());
-        return JavaFile.builder("com.example.helloworld", interfaceBuilder.build()).build();
+        return interfaceBuilder.build();
     }
 
     private void registerResources(Map<String, Resource> resources)

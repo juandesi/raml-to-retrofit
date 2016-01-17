@@ -4,10 +4,10 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package desi.juan;
+package desi.juan.internal;
 
-import static desi.juan.util.MethodGeneratorUtils.buildMethodName;
-import static desi.juan.util.MethodGeneratorUtils.buildParamName;
+import static desi.juan.internal.util.MethodGeneratorUtils.buildMethodName;
+import static desi.juan.internal.util.MethodGeneratorUtils.buildParamName;
 
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.MethodSpec;
@@ -21,7 +21,7 @@ import java.util.Set;
 
 import javax.lang.model.element.Modifier;
 
-import desi.juan.action.ActionRegisterProvider;
+import desi.juan.internal.action.ActionRegisterProvider;
 import org.raml.model.Action;
 import org.raml.model.parameter.Header;
 import retrofit.Call;
@@ -29,7 +29,7 @@ import retrofit.http.Body;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
-public class RetrofitMethodSignature implements RetrofitCodeGenerable<MethodSpec>
+class RetrofitMethodSignature implements RetrofitCodeGenerable<MethodSpec>
 {
     private static final String VALUE = "value";
     private final Action action;

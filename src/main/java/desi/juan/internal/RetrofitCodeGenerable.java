@@ -4,12 +4,9 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package desi.juan.exception;
+package desi.juan.internal;
 
-public class IllegalNameException extends RuntimeException
+interface RetrofitCodeGenerable<T>
 {
-    public IllegalNameException(String message)
-    {
-        super(message);
-    }
+   T generate();
 }
