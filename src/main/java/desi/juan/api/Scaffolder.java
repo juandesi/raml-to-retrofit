@@ -6,11 +6,11 @@
  */
 package desi.juan.api;
 
-import com.squareup.javapoet.JavaFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+
+import com.squareup.javapoet.JavaFile;
 
 import desi.juan.internal.RetrofitInterface;
 
@@ -30,7 +30,7 @@ public class Scaffolder
     {
         if (!directory.exists())
         {
-            directory.createNewFile();
+            directory.mkdir();
         }
         JavaFile.builder(filePackage, retrofitInterface.generate()).build().writeTo(directory);
     }
